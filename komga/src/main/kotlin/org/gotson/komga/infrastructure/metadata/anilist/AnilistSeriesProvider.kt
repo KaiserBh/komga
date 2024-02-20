@@ -19,7 +19,6 @@ private val logger = KotlinLogging.logger {}
 class AnilistSeriesProvider : SeriesMetadataProvider {
   private val anilistApi = "https://graphql.anilist.co/"
   private val webClient: WebClient = WebClient.create(anilistApi)
-  private val rateLimitDelay: Duration = Duration.ofSeconds(1)
 
   override fun getSeriesMetadata(series: Series): SeriesMetadataPatch? {
     if (series.oneshot) {
@@ -66,18 +65,34 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
     val bodyValue = mapOf("query" to query)
 
     try {
-      val anilistResponseMono =
-        webClient.post()
-          .uri("/")
-          .bodyValue(bodyValue)
-          .retrieve()
-          .bodyToMono(Root::class.java)
-          .onErrorResume { e ->
-            logger.error { "Error fetching AniList metadata: ${e.message}" }
+      val anilistResponseMono = webClient.post()
+        .uri("/")
+        .bodyValue(bodyValue)
+        .exchangeToMono { response ->
+          val headers = response.headers().asHttpHeaders()
+          val rateLimitRemaining = headers.getFirst("X-RateLimit-Remaining")?.toIntOrNull()
+          val retryAfter = headers.getFirst("Retry-After")?.toLongOrNull()
+
+          if (response.statusCode().is2xxSuccessful) {
+            rateLimitRemaining?.let {
+              if (it < 10) {
+                logger.debug { "Approaching rate limit, remaining: $it" }
+              }
+            }
+            response.bodyToMono(Root::class.java)
+          } else if (response.statusCode().value() == 429 && retryAfter != null) {
+            logger.warn { "Rate limit exceeded, retrying after $retryAfter seconds" }
+            Mono.delay(Duration.ofSeconds(retryAfter)).flatMap { Mono.empty() }
+          } else {
+            logger.error { "Failed to fetch AniList metadata, status code: ${response.statusCode()}" }
             Mono.empty()
           }
-          .delaySubscription(rateLimitDelay)
-          .block()
+        }
+        .onErrorResume { e ->
+          logger.error { "Error fetching AniList metadata: ${e.message}" }
+          Mono.empty()
+        }
+        .block()
 
       anilistResponseMono?.let { it ->
         val media = it.data.media
