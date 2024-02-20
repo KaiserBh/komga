@@ -65,34 +65,35 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
     val bodyValue = mapOf("query" to query)
 
     try {
-      val anilistResponseMono = webClient.post()
-        .uri("/")
-        .bodyValue(bodyValue)
-        .exchangeToMono { response ->
-          val headers = response.headers().asHttpHeaders()
-          val rateLimitRemaining = headers.getFirst("X-RateLimit-Remaining")?.toIntOrNull()
-          val retryAfter = headers.getFirst("Retry-After")?.toLongOrNull()
+      val anilistResponseMono =
+        webClient.post()
+          .uri("/")
+          .bodyValue(bodyValue)
+          .exchangeToMono { response ->
+            val headers = response.headers().asHttpHeaders()
+            val rateLimitRemaining = headers.getFirst("X-RateLimit-Remaining")?.toIntOrNull()
+            val retryAfter = headers.getFirst("Retry-After")?.toLongOrNull()
 
-          if (response.statusCode().is2xxSuccessful) {
-            rateLimitRemaining?.let {
-              if (it < 10) {
-                logger.debug { "Approaching rate limit, remaining: $it" }
+            if (response.statusCode().is2xxSuccessful) {
+              rateLimitRemaining?.let {
+                if (it < 10) {
+                  logger.debug { "Approaching rate limit, remaining: $it" }
+                }
               }
+              response.bodyToMono(Root::class.java)
+            } else if (response.statusCode().value() == 429 && retryAfter != null) {
+              logger.warn { "Rate limit exceeded, retrying after $retryAfter seconds" }
+              Mono.delay(Duration.ofSeconds(retryAfter)).flatMap { Mono.empty() }
+            } else {
+              logger.error { "Failed to fetch AniList metadata, status code: ${response.statusCode()}" }
+              Mono.empty()
             }
-            response.bodyToMono(Root::class.java)
-          } else if (response.statusCode().value() == 429 && retryAfter != null) {
-            logger.warn { "Rate limit exceeded, retrying after $retryAfter seconds" }
-            Mono.delay(Duration.ofSeconds(retryAfter)).flatMap { Mono.empty() }
-          } else {
-            logger.error { "Failed to fetch AniList metadata, status code: ${response.statusCode()}" }
+          }
+          .onErrorResume { e ->
+            logger.error { "Error fetching AniList metadata: ${e.message}" }
             Mono.empty()
           }
-        }
-        .onErrorResume { e ->
-          logger.error { "Error fetching AniList metadata: ${e.message}" }
-          Mono.empty()
-        }
-        .block()
+          .block()
 
       anilistResponseMono?.let { it ->
         val media = it.data.media
