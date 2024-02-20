@@ -1,3 +1,5 @@
+# [1.10.6](https://github.com/kaiserbh/komga/compare/1.10.5...1.10.6) (2024-02-20)
+
 # [1.10.5](https://github.com/KaiserBh/komga/compare/1.10.4...1.10.5) (2024-02-20)
 
 # [1.10.4](https://github.com/KaiserBh/komga/compare/1.10.3...1.10.4) (2024-02-20)
