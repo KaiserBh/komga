@@ -160,10 +160,10 @@ jreleaser {
   packagers {
     docker {
       active = Active.RELEASE
-      continueOnError = true
+      continueOnError = false
       templateDirectory = rootDir.resolve("komga/docker")
       repository.active = Active.NEVER
-      buildArgs = listOf("--cache-from", "gotson/komga:latest")
+      buildArgs = listOf("--cache-from", "kaiserbh/komga:latest")
       imageNames =
         listOf(
           "komga:latest",

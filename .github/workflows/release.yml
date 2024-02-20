@@ -22,16 +22,8 @@ on:
         description: 'Create Github Release'
         default: true
         type: boolean
-      conveyor-copied-site:
-        description: 'Conveyor copied site'
-        default: true
-        type: boolean
       docker_release:
         description: 'Push Docker images'
-        default: true
-        type: boolean
-      msstore_release:
-        description: 'Release to the MS Store'
         default: true
         type: boolean
 
