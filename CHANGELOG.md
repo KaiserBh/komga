@@ -1,3 +1,5 @@
+# [1.10.4](https://github.com/KaiserBh/komga/compare/1.10.3...1.10.4) (2024-02-20)
+
 # [1.10.3](https://github.com/gotson/komga/compare/1.10.2...1.10.3) (2024-01-23)
 ## 🐛 Fixes
 **komga**

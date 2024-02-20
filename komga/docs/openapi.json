@@ -9558,6 +9558,9 @@
           "importMylarSeries": {
             "type": "boolean"
           },
+          "importAnilistSeries": {
+            "type": "boolean"
+          },
           "importLocalArtwork": {
             "type": "boolean"
           },
@@ -10262,6 +10265,7 @@
           "emptyTrashAfterScan",
           "hashFiles",
           "hashPages",
+          "importAnilistSeries",
           "importBarcodeIsbn",
           "importComicInfoBook",
           "importComicInfoCollection",
@@ -10314,6 +10318,9 @@
             "type": "boolean"
           },
           "importMylarSeries": {
+            "type": "boolean"
+          },
+          "importAnilistSeries": {
             "type": "boolean"
           },
           "importLocalArtwork": {
@@ -10395,6 +10402,7 @@
           "hashFiles",
           "hashPages",
           "id",
+          "importAnilistSeries",
           "importBarcodeIsbn",
           "importComicInfoBook",
           "importComicInfoCollection",
@@ -10451,6 +10459,9 @@
             "type": "boolean"
           },
           "importMylarSeries": {
+            "type": "boolean"
+          },
+          "importAnilistSeries": {
             "type": "boolean"
           },
           "importLocalArtwork": {
@@ -10813,9 +10824,6 @@
               "type": "string"
             }
           },
-          "ageRestriction": {
-            "$ref": "#/components/schemas/AgeRestrictionUpdateDto"
-          },
           "labelsAllow": {
             "uniqueItems": true,
             "type": "array",
@@ -10829,6 +10837,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "ageRestriction": {
+            "$ref": "#/components/schemas/AgeRestrictionUpdateDto"
           },
           "sharedLibraries": {
             "$ref": "#/components/schemas/SharedLibrariesUpdateDto"
