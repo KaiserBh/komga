@@ -37,7 +37,7 @@ on:
 
 jobs:
   version:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     outputs:
       version_current: ${{ steps.versions.outputs.version_current }}
       version_next: ${{ steps.versions.outputs.version_next }}
@@ -46,21 +46,21 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
       - name: Install svu
-        run: brew install caarlos0/tap/svu
+        run: |
+          echo 'deb [trusted=yes] https://apt.fury.io/caarlos0/ /' | sudo tee /etc/apt/sources.list.d/caarlos0.list
+          sudo apt update
+          sudo apt install svu
       - name: Compute next version for release
         run: |
-          echo "VERSION_NEXT=`svu --pattern="[0-9]+\.[0-9]+\.[0-9]+" --strip-prefix ${{ inputs.bump }}`" | tee -a $GITHUB_ENV
-          echo "VERSION_NEXT_SUFFIX=`svu --pattern="[0-9]+\.[0-9]+\.[0-9]+" --strip-prefix ${{ inputs.bump }}`" | tee -a $GITHUB_ENV
+          echo "VERSION_NEXT=`svu ${{ inputs.bump }} --pattern="[0-9]*" --strip-prefix`" | tee -a $GITHUB_ENV
+          echo "VERSION_NEXT_SUFFIX=`svu ${{ inputs.bump }} --pattern="[0-9]*" --strip-prefix`" | tee -a $GITHUB_ENV
       - name: Set Versions
         id: versions
         run: |
-          echo "version_current=`svu --pattern="[0-9]+\.[0-9]+\.[0-9]+" --strip-prefix current`" >> $GITHUB_OUTPUT
+          echo "version_current=`svu current --pattern="[0-9]*" --strip-prefix`" >> $GITHUB_OUTPUT
           echo "version_next=${{ env.VERSION_NEXT_SUFFIX }}" >> $GITHUB_OUTPUT
-          [[ `svu --pattern="[0-9]+\.[0-9]+\.[0-9]+" --strip-prefix current` != ${{ env.VERSION_NEXT }} ]] && echo "should_release=true" >> $GITHUB_OUTPUT || echo
+          [[ `svu current --pattern="[0-9]*" --strip-prefix` != ${{ env.VERSION_NEXT }} ]] && echo "should_release=true" >> $GITHUB_OUTPUT || echo
 
   release:
     name: Release
