@@ -1,3 +1,8 @@
+# [1.10.7](https://github.com/kaiserbh/komga/compare/1.10.6...1.10.7) (2024-02-20)
+## 🔄️ Changes
+
+- anilist metadata implement rate limit delaying. ([06a223d](https://github.com/kaiserbh/komga/commits/06a223d))
+
 # [1.10.6](https://github.com/kaiserbh/komga/compare/1.10.5...1.10.6) (2024-02-20)
 
 # [1.10.5](https://github.com/KaiserBh/komga/compare/1.10.4...1.10.5) (2024-02-20)
