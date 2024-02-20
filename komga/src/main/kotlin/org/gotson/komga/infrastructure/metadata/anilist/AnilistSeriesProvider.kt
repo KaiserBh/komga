@@ -97,9 +97,9 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
 
       anilistResponseMono?.let { it ->
         val media = it.data.media
-        val titleVariants = listOfNotNull(media.title.romaji, media.title.english, media.title.native, media.title.userPreferred)
+        val titleVariants = listOfNotNull(media.title?.romaji, media.title?.english, media.title?.native, media.title?.userPreferred)
         val cleanedTitleNormalized = normalizeTitle(cleanedTitle)
-        val isYearMatch = year != null && media.startDate.year.toInt() == year
+        val isYearMatch = year != null && media.startDate?.year?.toInt() == year
         val isTitleMatch = titleVariants.any { normalizeTitle(it).equals(cleanedTitleNormalized, ignoreCase = true) }
 
         if (isYearMatch) {
@@ -148,7 +148,7 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
     val anilistMetadata = anilistData.data.media
 
     val status =
-      when (anilistMetadata.status.uppercase()) {
+      when (anilistMetadata.status?.uppercase()) {
         "FINISHED" -> SeriesMetadata.Status.ENDED
         "RELEASING" -> SeriesMetadata.Status.ONGOING
         "CANCELLED" -> SeriesMetadata.Status.ABANDONED
@@ -157,31 +157,31 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
         else -> null
       }
 
-    val genresSet = anilistMetadata.genres.toSet()
+    val genresSet = anilistMetadata.genres?.toSet()
 
-    val ageRating = if (anilistMetadata.isAdult) 18 else null
+    val ageRating = if (anilistMetadata.isAdult == true) 18 else null
 
     val cleanDescription =
       anilistMetadata.description
         // Converts <br> and <br/> to newline characters
-        .replace(Regex("<br\\s*/?>"), "\n")
+        ?.replace(Regex("<br\\s*/?>"), "\n")
         // Removes remaining HTML tags
-        .replace(Regex("<[^>]*>"), "")
+        ?.replace(Regex("<[^>]*>"), "")
         // Replaces multiple spaces with a single space
-        .replace(Regex("\\s+"), " ")
+        ?.replace(Regex("\\s+"), " ")
         // Removes any spaces right after new lines
-        .replace(Regex("\\n "), "\n")
-        .trim()
+        ?.replace(Regex("\\n "), "\n")
+        ?.trim()
 
     return SeriesMetadataPatch(
-      title = anilistMetadata.title.english.ifBlank { null },
-      titleSort = anilistMetadata.title.romaji.ifBlank { anilistMetadata.title.english.ifBlank { null } },
+      title = anilistMetadata.title?.english?.ifBlank { null },
+      titleSort = anilistMetadata.title?.romaji?.ifBlank { anilistMetadata.title.english?.ifBlank { null } },
       status = status,
-      summary = cleanDescription.ifBlank { null },
+      summary = cleanDescription?.ifBlank { null },
       readingDirection = null,
       publisher = null,
       ageRating = ageRating,
-      language = anilistMetadata.countryOfOrigin.ifBlank { null },
+      language = anilistMetadata.countryOfOrigin?.ifBlank { null },
       genres = genresSet,
       totalBookCount = anilistMetadata.volumes,
       collections = emptySet(),
