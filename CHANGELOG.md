@@ -1,3 +1,8 @@
+# [1.11.1](https://github.com/kaiserbh/komga/compare/1.11.0...1.11.1) (2024-03-23)
+## 🔄️ Changes
+
+- anilist rate limit delay 60 seconds ([5e99b65](https://github.com/kaiserbh/komga/commits/5e99b65))
+
 # [1.11.0](https://github.com/kaiserbh/komga/compare/1.10.8...1.11.0) (2024-03-23)
 ## 🚀 Features
 **opds**
