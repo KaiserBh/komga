@@ -67,6 +67,9 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
     val bodyValue = mapOf("query" to query)
 
     try {
+      val fixedDelayInMillis = 65000L // 65 seconds delay the last 3 request to reset Anilist api rate limit.
+      val rateLimitApproachThreshold = 65
+
       val anilistResponseMono =
         webClient.post()
           .uri("/")
@@ -77,14 +80,18 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
             val retryAfter = headers.getFirst("Retry-After")?.toLongOrNull()
 
             if (response.statusCode().is2xxSuccessful) {
+              logger.debug { "Current Anilist rate limit remaining: $rateLimitRemaining" }
+
               rateLimitRemaining?.let {
-                if (it < 10) {
-                  logger.debug { "Approaching rate limit, remaining: $it" }
+                if (it < rateLimitApproachThreshold) {
+                  logger.warn { "Approaching Anilist rate limit, remaining: $it. Waiting for the next minute." }
+                  // Wait for the rest of the minute as a simple approach to avoid hitting the limit
+                  Thread.sleep(fixedDelayInMillis)
                 }
               }
               response.bodyToMono(Root::class.java)
             } else if (response.statusCode().value() == 429 && retryAfter != null) {
-              logger.warn { "Rate limit exceeded, retrying after $retryAfter seconds" }
+              logger.warn { "Anilist Rate limit exceeded, retrying after $retryAfter seconds" }
               Mono.delay(Duration.ofSeconds(retryAfter)).flatMap { Mono.empty() }
             } else {
               logger.error { "Failed to fetch AniList metadata, status code: ${response.statusCode()}" }
