@@ -1,3 +1,8 @@
+# [1.10.8](https://github.com/kaiserbh/komga/compare/1.10.7...1.10.8) (2024-02-20)
+## 🔄️ Changes
+
+- improve Anilist Metadata provider. ([c067745](https://github.com/kaiserbh/komga/commits/c067745))
+
 # [1.10.7](https://github.com/kaiserbh/komga/compare/1.10.6...1.10.7) (2024-02-20)
 ## 🔄️ Changes
 
