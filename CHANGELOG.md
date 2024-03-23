@@ -1,18 +1,43 @@
-# [1.10.8](https://github.com/kaiserbh/komga/compare/1.10.7...1.10.8) (2024-02-20)
-## 🔄️ Changes
+# [1.10.4](https://github.com/gotson/komga/compare/1.10.3...1.10.4) (2024-03-12)
+## 🐛 Fixes
+**api**
+- cap search results to avoid SQLITE_TOOBIG ([d34d4a5](https://github.com/gotson/komga/commits/d34d4a5)), closes [#1428](https://github.com/gotson/komga/issues/1428)
+- book fileLastModified was in local time instead of UTC ([1648533](https://github.com/gotson/komga/commits/1648533)), closes [#1430](https://github.com/gotson/komga/issues/1430)
 
-- improve Anilist Metadata provider. ([c067745](https://github.com/kaiserbh/komga/commits/c067745))
+**unscoped**
+- better compatibility for malformed epub files ([e09cbc4](https://github.com/gotson/komga/commits/e09cbc4)), closes [#1441](https://github.com/gotson/komga/issues/1441)
+- some epub resources would not be detected properly ([f8e40ce](https://github.com/gotson/komga/commits/f8e40ce)), closes [#1441](https://github.com/gotson/komga/issues/1441) [#1442](https://github.com/gotson/komga/issues/1442)
 
-# [1.10.7](https://github.com/kaiserbh/komga/compare/1.10.6...1.10.7) (2024-02-20)
-## 🔄️ Changes
+## 🛠  Build
 
-- anilist metadata implement rate limit delaying. ([06a223d](https://github.com/kaiserbh/komga/commits/06a223d))
+- migrate to gradle/actions/setup-gradle@v3 ([5466087](https://github.com/gotson/komga/commits/5466087))
 
-# [1.10.6](https://github.com/kaiserbh/komga/compare/1.10.5...1.10.6) (2024-02-20)
+## 🌐 Translation
+**komga-tray**
+- deleted translation using Weblate (Chinese (Simplified)) ([ed374a1](https://github.com/gotson/komga/commits/ed374a1))
+- translated using Weblate (Chinese (Simplified)) ([4b7bfa0](https://github.com/gotson/komga/commits/4b7bfa0))
+- translated using Weblate (Korean) ([05f02f5](https://github.com/gotson/komga/commits/05f02f5))
+- translated using Weblate (Italian) ([e38dce2](https://github.com/gotson/komga/commits/e38dce2))
+- added translation using Weblate (Portuguese) ([0288231](https://github.com/gotson/komga/commits/0288231))
+- translated using Weblate (Turkish) ([0f189c1](https://github.com/gotson/komga/commits/0f189c1))
 
-# [1.10.5](https://github.com/KaiserBh/komga/compare/1.10.4...1.10.5) (2024-02-20)
+**webui**
+- translated using Weblate (Chinese (Simplified)) ([38cdf70](https://github.com/gotson/komga/commits/38cdf70))
+- translated using Weblate (Korean) ([ac3eb4e](https://github.com/gotson/komga/commits/ac3eb4e))
+- translated using Weblate (Finnish) ([d98de06](https://github.com/gotson/komga/commits/d98de06))
+- translated using Weblate (Italian) ([e9f1017](https://github.com/gotson/komga/commits/e9f1017))
+- added translation using Weblate (Portuguese) ([5b70520](https://github.com/gotson/komga/commits/5b70520))
+- translated using Weblate (Portuguese (Brazil)) ([6e915d6](https://github.com/gotson/komga/commits/6e915d6))
+- translated using Weblate (Turkish) ([4e5cc0d](https://github.com/gotson/komga/commits/4e5cc0d))
 
-# [1.10.4](https://github.com/KaiserBh/komga/compare/1.10.3...1.10.4) (2024-02-20)
+## ⚙️ Dependencies
+**ci**
+- bump gradle/wrapper-validation-action from 1 to 2 ([5a21c5c](https://github.com/gotson/komga/commits/5a21c5c))
+- bump hydraulic-software/conveyor from 13.0 to 13.1 ([c9ab1f7](https://github.com/gotson/komga/commits/c9ab1f7))
+- bump peter-evans/dockerhub-description from 3.4.2 to 4.0.0 ([898bc19](https://github.com/gotson/komga/commits/898bc19))
+
+**webui**
+- bump sanitize-html from 2.11.0 to 2.12.1 in /komga-webui ([b0b457a](https://github.com/gotson/komga/commits/b0b457a))
 
 # [1.10.3](https://github.com/gotson/komga/compare/1.10.2...1.10.3) (2024-01-23)
 ## 🐛 Fixes
