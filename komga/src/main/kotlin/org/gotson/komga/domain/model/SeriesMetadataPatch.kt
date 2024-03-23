@@ -10,6 +10,7 @@ data class SeriesMetadataPatch(
   val ageRating: Int?,
   val language: String?,
   val genres: Set<String>?,
+  val tags: Set<String>?,
   val totalBookCount: Int?,
   val collections: Set<String>,
 )

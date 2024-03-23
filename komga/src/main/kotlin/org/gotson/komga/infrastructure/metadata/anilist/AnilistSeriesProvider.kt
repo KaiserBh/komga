@@ -158,6 +158,7 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
       }
 
     val genresSet = anilistMetadata.genres?.toSet()
+    val tagsSet = anilistMetadata.tags?.mapNotNull { it.name }?.toSet()
 
     val ageRating = if (anilistMetadata.isAdult == true) 18 else null
 
@@ -185,6 +186,7 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
       genres = genresSet,
       totalBookCount = anilistMetadata.volumes,
       collections = emptySet(),
+      tags = tagsSet
     )
   }
 

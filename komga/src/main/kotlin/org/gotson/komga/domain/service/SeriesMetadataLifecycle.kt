@@ -115,6 +115,7 @@ class SeriesMetadataLifecycle(
         publisher = patches.mostFrequent { it.publisher },
         totalBookCount = patches.mapNotNull { it.totalBookCount }.maxOrNull(),
         collections = emptySet(),
+        tags = patches.mapNotNull { it.tags }.flatten().toSet().ifEmpty { null },
       )
 
     handlePatchForSeriesMetadata(aggregatedPatch, series)
