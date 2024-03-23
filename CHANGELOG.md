@@ -1,3 +1,54 @@
+# [1.11.0](https://github.com/kaiserbh/komga/compare/1.10.8...1.11.0) (2024-03-23)
+## 🚀 Features
+**opds**
+- support authentication for OPDS ([3250c12](https://github.com/kaiserbh/komga/commits/3250c12))
+
+**unscoped**
+- update tags when fetching metadata from anilist. ([021c459](https://github.com/kaiserbh/komga/commits/021c459))
+
+## 🐛 Fixes
+**api**
+- disable content negotiation for images in webpub manifest ([5a94ee1](https://github.com/kaiserbh/komga/commits/5a94ee1))
+- cap search results to avoid SQLITE_TOOBIG ([d34d4a5](https://github.com/kaiserbh/komga/commits/d34d4a5)), closes [#1428](https://github.com/kaiserbh/komga/issues/1428)
+
+**unscoped**
+- better compatibility for malformed epub files ([e09cbc4](https://github.com/kaiserbh/komga/commits/e09cbc4)), closes [#1441](https://github.com/kaiserbh/komga/issues/1441)
+- some epub resources would not be detected properly ([f8e40ce](https://github.com/kaiserbh/komga/commits/f8e40ce)), closes [#1441](https://github.com/kaiserbh/komga/issues/1441) [#1442](https://github.com/kaiserbh/komga/issues/1442)
+
+## 🔄️ Changes
+
+- reorganize code shared between REST and OPDS ([ec3eb44](https://github.com/kaiserbh/komga/commits/ec3eb44))
+
+## 🌐 Translation
+**komga-tray**
+- deleted translation using Weblate (Chinese (Simplified)) ([ed374a1](https://github.com/kaiserbh/komga/commits/ed374a1))
+- translated using Weblate (Chinese (Simplified)) ([4b7bfa0](https://github.com/kaiserbh/komga/commits/4b7bfa0))
+- translated using Weblate (Korean) ([05f02f5](https://github.com/kaiserbh/komga/commits/05f02f5))
+- translated using Weblate (Italian) ([e38dce2](https://github.com/kaiserbh/komga/commits/e38dce2))
+- added translation using Weblate (Portuguese) ([0288231](https://github.com/kaiserbh/komga/commits/0288231))
+- translated using Weblate (Turkish) ([0f189c1](https://github.com/kaiserbh/komga/commits/0f189c1))
+
+**webui**
+- translated using Weblate (Chinese (Simplified)) ([38cdf70](https://github.com/kaiserbh/komga/commits/38cdf70))
+- translated using Weblate (Korean) ([ac3eb4e](https://github.com/kaiserbh/komga/commits/ac3eb4e))
+- translated using Weblate (Finnish) ([d98de06](https://github.com/kaiserbh/komga/commits/d98de06))
+- translated using Weblate (Italian) ([e9f1017](https://github.com/kaiserbh/komga/commits/e9f1017))
+- added translation using Weblate (Portuguese) ([5b70520](https://github.com/kaiserbh/komga/commits/5b70520))
+- translated using Weblate (Portuguese (Brazil)) ([6e915d6](https://github.com/kaiserbh/komga/commits/6e915d6))
+- translated using Weblate (Turkish) ([4e5cc0d](https://github.com/kaiserbh/komga/commits/4e5cc0d))
+
+## ⚙️ Dependencies
+**webui**
+- bump follow-redirects from 1.15.4 to 1.15.6 in /komga-webui ([3e4f705](https://github.com/kaiserbh/komga/commits/3e4f705))
+- bump sanitize-html from 2.11.0 to 2.12.1 in /komga-webui (#21) ([a8ba497](https://github.com/kaiserbh/komga/commits/a8ba497)), closes [#21](https://github.com/kaiserbh/komga/issues/21)
+- bump sanitize-html from 2.11.0 to 2.12.1 in /komga-webui (#20) ([748fcd8](https://github.com/kaiserbh/komga/commits/748fcd8)), closes [#20](https://github.com/kaiserbh/komga/issues/20)
+- bump sanitize-html from 2.11.0 to 2.12.1 in /komga-webui (#18) ([fe3d847](https://github.com/kaiserbh/komga/commits/fe3d847)), closes [#18](https://github.com/kaiserbh/komga/issues/18)
+- bump sanitize-html from 2.11.0 to 2.12.1 in /komga-webui (#16) ([349e31c](https://github.com/kaiserbh/komga/commits/349e31c)), closes [#16](https://github.com/kaiserbh/komga/issues/16)
+- bump sanitize-html from 2.11.0 to 2.12.1 in /komga-webui (#14) ([694a548](https://github.com/kaiserbh/komga/commits/694a548)), closes [#14](https://github.com/kaiserbh/komga/issues/14)
+- bump sanitize-html from 2.11.0 to 2.12.1 in /komga-webui (#12) ([da81083](https://github.com/kaiserbh/komga/commits/da81083)), closes [#12](https://github.com/kaiserbh/komga/issues/12)
+- bump sanitize-html from 2.11.0 to 2.12.1 in /komga-webui (#11) ([92b8b18](https://github.com/kaiserbh/komga/commits/92b8b18)), closes [#11](https://github.com/kaiserbh/komga/issues/11)
+- bump sanitize-html from 2.11.0 to 2.12.1 in /komga-webui ([b0b457a](https://github.com/kaiserbh/komga/commits/b0b457a))
+
 # [1.10.4](https://github.com/gotson/komga/compare/1.10.3...1.10.4) (2024-03-12)
 ## 🐛 Fixes
 **api**
