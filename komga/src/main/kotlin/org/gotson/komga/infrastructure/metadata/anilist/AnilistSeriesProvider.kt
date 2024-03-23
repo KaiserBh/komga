@@ -167,10 +167,11 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
       }
 
     val genresSet = anilistMetadata.genres?.toSet()
-    val tagsSet = anilistMetadata.tags
-      ?.filter { tag -> tag.isMediaSpoiler != true } // Exclude tags with isMediaSpoiler == true
-      ?.mapNotNull { it.name }
-      ?.toSet()
+    val tagsSet =
+      anilistMetadata.tags
+        ?.filter { tag -> tag.isMediaSpoiler != true } // Exclude tags with isMediaSpoiler == true
+        ?.mapNotNull { it.name }
+        ?.toSet()
 
     val ageRating = if (anilistMetadata.isAdult == true) 18 else null
 
@@ -198,7 +199,7 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
       genres = genresSet,
       totalBookCount = anilistMetadata.volumes,
       collections = emptySet(),
-      tags = tagsSet
+      tags = tagsSet,
     )
   }
 

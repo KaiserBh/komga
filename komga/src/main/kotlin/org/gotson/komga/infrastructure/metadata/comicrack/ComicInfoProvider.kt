@@ -149,7 +149,7 @@ class ComicInfoProvider(
         genres = if (!genres.isNullOrEmpty()) genres.toSet() else null,
         totalBookCount = comicInfo.count,
         collections = comicInfo.seriesGroup?.split(',')?.mapNotNull { it.trim().ifBlank { null } }?.toSet() ?: emptySet(),
-        tags = emptySet()
+        tags = emptySet(),
       )
     }
     return null
