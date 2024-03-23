@@ -48,6 +48,8 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
           genres
           tags {
             name
+            isMediaSpoiler
+            isGeneralSpoiler
           }
           countryOfOrigin
           coverImage {
@@ -158,7 +160,10 @@ class AnilistSeriesProvider : SeriesMetadataProvider {
       }
 
     val genresSet = anilistMetadata.genres?.toSet()
-    val tagsSet = anilistMetadata.tags?.mapNotNull { it.name }?.toSet()
+    val tagsSet = anilistMetadata.tags
+      ?.filter { tag -> tag.isMediaSpoiler != true } // Exclude tags with isMediaSpoiler == true
+      ?.mapNotNull { it.name }
+      ?.toSet()
 
     val ageRating = if (anilistMetadata.isAdult == true) 18 else null
 

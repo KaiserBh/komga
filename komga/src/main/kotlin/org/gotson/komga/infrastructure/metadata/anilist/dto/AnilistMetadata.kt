@@ -38,6 +38,8 @@ data class StartDate(
 
 data class Tag(
   val name: String?,
+  val isMediaSpoiler: Boolean?,
+  val isGeneralSpoiler: Boolean?
 )
 
 data class CoverImage(
